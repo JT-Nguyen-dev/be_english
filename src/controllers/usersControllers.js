@@ -44,8 +44,22 @@ let updateUsers = async (req, res) => {
   }
 };
 
+let deleteUsers = async (req, res) => {
+  try {
+    const result = await client.query(`Delete from Users where id=${req.params.id}`);
+    res.status(200).json({
+      message: 'ok',
+    })
+  } catch (err) {
+    res.status(500).json({
+      err: err.message
+    })
+  }
+};
+
 module.exports = {
   getAllUsers,
   getUsersWithId,
-  updateUsers
+  updateUsers,
+  deleteUsers
 }
